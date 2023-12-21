@@ -2,6 +2,7 @@ import 'package:dandia_driver/features/auth/presentation/sign_in/bloc/signin_blo
 import 'package:dandia_driver/features/auth/presentation/sign_in/sign_in_screen.dart';
 import 'package:dandia_driver/features/auth/presentation/sign_up/bloc/signup_bloc.dart';
 import 'package:dandia_driver/features/auth/presentation/sign_up/sign_up_view.dart';
+import 'package:dandia_driver/features/dashboard/bloc/dashboard_bloc.dart';
 import 'package:dandia_driver/features/dashboard/dashboard_view.dart';
 import 'package:dandia_driver/features/home/presentation/bloc/home_bloc.dart';
 import 'package:dandia_driver/features/home/presentation/home_view.dart';
@@ -22,7 +23,10 @@ class Routes {
         return _registerBlocView(
             view: const HomeView(), bloc: HomeBloc(), settings: settings);
       case DashboardView.routeName:
-        return MaterialPageRoute(builder: (_) => const DashboardView());
+        return _registerBlocView(
+            view: const DashboardView(),
+            bloc: DashboardBloc(),
+            settings: settings);
 
       default:
         return MaterialPageRoute(

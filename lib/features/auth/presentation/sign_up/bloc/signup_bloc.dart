@@ -86,7 +86,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
             CarModel car = CarModel(
                 carColor: event.carColor,
                 carModel: event.carModel,
-                carNumber: event.carModel);
+                carNumber: event.carNumber);
 
             var user = AppUserModel(
                 id: firebaseUser?.uid ?? "",

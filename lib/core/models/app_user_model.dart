@@ -68,7 +68,8 @@ class AppUserModel extends HiveObject with EquatableMixin {
         phone: map['phone'] ?? "",
         blockStatus: map['blockStatus'] ?? false,
         imageUrl: map['imageUrl'] ?? "",
-        car: CarModel.fromMap(map['car']));
+        car: CarModel.fromMap(Map<String, dynamic>.from(
+            map["car"].map((key, value) => MapEntry(key, value)))));
   }
 
   //to map
