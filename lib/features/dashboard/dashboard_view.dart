@@ -16,7 +16,6 @@ class DashboardView extends StatelessWidget {
     final List<Widget> pages = [
       const HomeView(),
       const EarningsView(),
-      
       const TripsView(),
       const ProfileView(),
     ];
@@ -51,9 +50,6 @@ class DashboardView extends StatelessWidget {
                       DashboardTabChangedEvent(index: index),
                     );
               },
-            ),
-            appBar: AppBar(
-              title: const Text('DashboardView'),
             ),
             body: pages[state.selectedIndex],
           ),
