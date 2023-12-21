@@ -4,11 +4,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class IFirebaseDatabaseService {
   Future<Either<Failure, AppUserModel>> addNewUserToDB(
-      {required String uid,
-      required String email,
-      required String name,
-      required String phone,
-      required bool blockStatus});
+      {required AppUserModel user});
 
   Future<Either<Failure, AppUserModel?>> retrieveUser({required String uid});
 }

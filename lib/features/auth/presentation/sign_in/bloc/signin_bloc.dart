@@ -9,6 +9,7 @@ import 'package:dandia_driver/features/auth/domain/usecases/log_out_usecase.dart
 import 'package:dandia_driver/features/auth/domain/usecases/sign_in_with_email_usecase.dart';
 import 'package:dandia_driver/features/auth/presentation/sign_up/sign_up_view.dart';
 import 'package:dandia_driver/core/locator.dart';
+import 'package:dandia_driver/features/dashboard/dashboard_view.dart';
 import 'package:dandia_driver/features/home/presentation/home_view.dart';
 import 'package:dandia_driver/services/dialog_and_sheet_service/i_dialog_and_sheet_service.dart';
 import 'package:dandia_driver/services/local_storage_service/i_local_storage_service.dart';
@@ -72,7 +73,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
                     boxName: HiveBoxNames.userBox,
                     key: HiveStorageKeys.userProfile,
                     value: r);
-                _navigation.navigateToNamed(HomeView.routeName);
+                _navigation.navigateToNamed(DashboardView.routeName);
               }
             } else {
               await LogOutUsecase().call(NoParams());

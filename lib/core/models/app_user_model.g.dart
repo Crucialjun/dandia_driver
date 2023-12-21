@@ -22,13 +22,15 @@ class AppUserModelAdapter extends TypeAdapter<AppUserModel> {
       username: fields[2] as String,
       phone: fields[3] as String,
       blockStatus: fields[4] as bool,
+      imageUrl: fields[5] as String,
+      car: fields[6] as CarModel,
     );
   }
 
   @override
   void write(BinaryWriter writer, AppUserModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +40,11 @@ class AppUserModelAdapter extends TypeAdapter<AppUserModel> {
       ..writeByte(3)
       ..write(obj.phone)
       ..writeByte(4)
-      ..write(obj.blockStatus);
+      ..write(obj.blockStatus)
+      ..writeByte(5)
+      ..write(obj.imageUrl)
+      ..writeByte(6)
+      ..write(obj.car);
   }
 
   @override

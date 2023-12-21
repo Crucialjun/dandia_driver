@@ -4,6 +4,8 @@ class AppAssets {
   //pngs
   static const String logo = 'assets/pngs/logo.png';
   static const String carIMage = 'assets/pngs/uberexec.png';
+  static const String profileAvatarMan = 'assets/pngs/avatarman.png';
+  
 
   //jsons
   static const String darkMapStyle = 'assets/jsons/dark_map_style.json';

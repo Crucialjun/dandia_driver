@@ -1,3 +1,4 @@
+import 'package:dandia_driver/core/models/car_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
@@ -20,42 +21,54 @@ class AppUserModel extends HiveObject with EquatableMixin {
   @HiveField(4)
   final bool blockStatus;
 
+  @HiveField(5)
+  final String imageUrl;
+
+  @HiveField(6)
+  final CarModel car;
+
   AppUserModel(
       {required this.id,
       required this.email,
       required this.username,
       required this.phone,
-      required this.blockStatus});
+      required this.blockStatus,
+      required this.imageUrl,
+      required this.car});
 
   @override
-  List<Object?> get props => [id, email, username, phone, blockStatus];
+  List<Object?> get props =>
+      [id, email, username, phone, blockStatus, imageUrl, car];
 
   //copy with
-  AppUserModel copyWith({
-    String? id,
-    String? email,
-    String? username,
-    String? phone,
-    bool? blockStatus,
-  }) {
+  AppUserModel copyWith(
+      {String? id,
+      String? email,
+      String? username,
+      String? phone,
+      bool? blockStatus,
+      String? imageUrl,
+      CarModel? car}) {
     return AppUserModel(
-      id: id ?? this.id,
-      email: email ?? this.email,
-      username: username ?? this.username,
-      phone: phone ?? this.phone,
-      blockStatus: blockStatus ?? this.blockStatus,
-    );
+        id: id ?? this.id,
+        email: email ?? this.email,
+        username: username ?? this.username,
+        phone: phone ?? this.phone,
+        blockStatus: blockStatus ?? this.blockStatus,
+        imageUrl: imageUrl ?? this.imageUrl,
+        car: car ?? this.car);
   }
 
   //from map
   factory AppUserModel.fromMap(Map<String, dynamic> map) {
     return AppUserModel(
-      id: map['id'] ?? "",
-      email: map['email'] ?? "",
-      username: map['username'] ?? "",
-      phone: map['phone'] ?? "",
-      blockStatus: map['blockStatus'] ?? false,
-    );
+        id: map['id'] ?? "",
+        email: map['email'] ?? "",
+        username: map['username'] ?? "",
+        phone: map['phone'] ?? "",
+        blockStatus: map['blockStatus'] ?? false,
+        imageUrl: map['imageUrl'] ?? "",
+        car: CarModel.fromMap(map['car']));
   }
 
   //to map
@@ -66,6 +79,8 @@ class AppUserModel extends HiveObject with EquatableMixin {
       'username': username,
       'phone': phone,
       'blockStatus': blockStatus,
+      'imageUrl': imageUrl,
+      'car': car.toMap()
     };
   }
 

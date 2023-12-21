@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "311245068162",
+    "firebase_url": "https://dandia-b38ba-default-rtdb.firebaseio.com",
+    "project_id": "dandia-b38ba",
+    "storage_bucket": "dandia-b38ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311245068162:android:4cb9fca60b3f9fea09e19b",
+        "android_client_info": {
+          "package_name": "com.example.dandia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0DxcIU20ApGLocfa6tEucmY9pwhZbq80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311245068162:android:bd1f757b857ad53609e19b",
+        "android_client_info": {
+          "package_name": "com.example.dandia_driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0DxcIU20ApGLocfa6tEucmY9pwhZbq80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

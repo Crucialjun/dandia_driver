@@ -12,20 +12,11 @@ class FirebaseDatabaseService implements IFirebaseDatabaseService {
 
   @override
   Future<Either<Failure, AppUserModel>> addNewUserToDB(
-      {required String uid,
-      required String email,
-      required String name,
-      required String phone,
-      required bool blockStatus}) async {
+      {required AppUserModel user}) async {
     try {
-      var appUser = AppUserModel(
-          id: uid,
-          email: email,
-          username: name,
-          phone: phone,
-          blockStatus: blockStatus);
-      await db.ref().child('drivers').child(uid).set(appUser.toMap());
-      return right(appUser);
+     
+      await db.ref().child('drivers').child(user.id).set(user.toMap());
+      return right(user);
     } catch (e) {
       return left(Failure(e.toString()));
     }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dandia_driver/core/constants/app_assets.dart';
 import 'package:dandia_driver/features/auth/presentation/sign_up/bloc/signup_bloc.dart';
 import 'package:dandia_driver/shared/app_input_decoration.dart';
@@ -7,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-
 
 class SignUpScreen extends StatefulWidget {
   static const String routeName = '/sign_up';
@@ -23,6 +24,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _vehicleModelController = TextEditingController();
+  final TextEditingController _vehicleColorController = TextEditingController();
+  final TextEditingController _vehicleRegistrationController =
+      TextEditingController();
 
   var _country = countries.firstWhere((element) => element.code == "KE");
 
@@ -32,6 +37,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _passwordController.dispose();
     _usernameController.dispose();
     _phoneController.dispose();
+    _vehicleModelController.dispose();
+    _vehicleColorController.dispose();
+    _vehicleRegistrationController.dispose();
 
     super.dispose();
   }
@@ -46,16 +54,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset(
-                  AppAssets.carIMage,
-                  height: 240.r,
-                  width: 240.r,
+                BlocBuilder<SignupBloc, SignupState>(
+                  builder: (context, state) {
+                    if (state.image == null) {
+                      return CircleAvatar(
+                        radius: 80.r,
+                        backgroundImage:
+                            const AssetImage(AppAssets.profileAvatarMan),
+                      );
+                    } else {
+                      return CircleAvatar(
+                        radius: 80.r,
+                        backgroundImage: FileImage(File(state.image!.path)),
+                      );
+                    }
+                  },
                 ),
-                const Text(
-                  "Create a User's Account",
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                SizedBox(height: 8.h),
+                InkWell(
+                  onTap: () {
+                    context.read<SignupBloc>().add(ChooseImageEvent());
+                  },
+                  child: const Text(
+                    "Select Image",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Padding(
@@ -116,6 +141,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         _country = country;
                       },
                     ),
+                    SizedBox(height: 22.h),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your vehicle model";
+                        }
+                        return null;
+                      },
+                      controller: _vehicleModelController,
+                      keyboardType: TextInputType.text,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration:
+                          const AppInputDecoration(labelString: "Card Model"),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 22.h),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your vehicle color";
+                        }
+                        return null;
+                      },
+                      controller: _vehicleColorController,
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration:
+                          const AppInputDecoration(labelString: "Car Color"),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 22.h),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your vehicle registration number";
+                        }
+                        return null;
+                      },
+                      controller: _vehicleRegistrationController,
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const AppInputDecoration(
+                          labelString: "Car Registration Number"),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
                     BlocBuilder<SignupBloc, SignupState>(
                       builder: (context, state) {
                         return ElevatedButton(
@@ -124,6 +196,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               context
                                   .read<SignupBloc>()
                                   .add(SignupWithEmailEvent(
+                                    carColor: _vehicleColorController.text,
+                                    carModel: _vehicleModelController.text,
+                                    carNumber:
+                                        _vehicleRegistrationController.text,
+                                    image: state.image,
                                     email: _emailController.text,
                                     password: _passwordController.text,
                                     username: _usernameController.text,
